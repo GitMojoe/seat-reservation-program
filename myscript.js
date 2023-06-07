@@ -61,6 +61,10 @@ makeRows(9, 15, 'middle');
 
 (function(){
     'use strict'
+
+    let selectedSeats = [];
+    const seats = document.querySelectorAll('.a');
+
     for (const key in reservedSeats){
         if( reservedSeats.hasOwnProperty(key)){
             const obj = reservedSeats[key]
@@ -73,15 +77,7 @@ makeRows(9, 15, 'middle');
     }
 
 
-}())
-
-(function(){
-    'use strict'
-
-    let selectedSeats = [];
-    let seats = document.querySelectorAll('.a');
-
-    seats.forEach( function (seat){
+    seats.forEach( seat=> {
         seat.addEventListener('click', function(){
             seatSelectionProcess(seat.id);
         });
@@ -138,7 +134,7 @@ makeRows(9, 15, 'middle');
         } 
         manageConfirmForm();
         
-        document.getElementById('confirmres').addEventListener('submit', function(event){
+        document.getElementById('confirmres').addEventListener('submit', event=>{
             processReservation();
             event.preventDefault();
         });
@@ -151,7 +147,7 @@ makeRows(9, 15, 'middle');
             let counter = 1;
             let nextRecord = '';
 
-            selectedSeats.forEach(function(thisSeat){
+            selectedSeats.forEach(thisSeat=> {
                 document.getElementById(thisSeat).className = 'r';
                 document.getElementById(thisSeat).innerHTML= 'R'
 
