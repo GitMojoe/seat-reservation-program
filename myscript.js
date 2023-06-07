@@ -88,7 +88,8 @@ makeRows(9, 15, 'middle');
     });
 
     function seatSelectionProcess(thisSeat){
-        let index = selectedSeats.indexOf(thisSeat)
+        if(!document.getElementById(thisSeat).classList.contains('r') ){
+            let index = selectedSeats.indexOf(thisSeat)
         if(index > -1){
             selectedSeats.splice(index, 1)
             document.getElementById(thisSeat).className = 'a'
@@ -98,6 +99,8 @@ makeRows(9, 15, 'middle');
         }
         manageConfirmForm();
         console.log(selectedSeats)
+        }
+        
     }
     document.getElementById('reserve').addEventListener('click', function(event){
         event.preventDefault();
@@ -133,5 +136,38 @@ makeRows(9, 15, 'middle');
                 })
             }
         } 
-        manageConfirmForm()       
+        manageConfirmForm();
+        
+        document.getElementById('confirmres').addEventListener('submit', function(event){
+            processReservation();
+            event.preventDefault();
+        });
+
+        function processReservation(){
+            const hardCodeRecords = Object.keys(reservedSeats).length;
+            const fname = document.getElementById('fname').value;
+            const lname = document.getElementById('lname').value;
+
+            let counter = 1;
+            let nextRecord = '';
+
+            selectedSeats.forEach(function(thisSeat){
+                document.getElementById(thisSeat).className = 'r';
+                document.getElementById(thisSeat).innerHTML= 'R'
+
+                nextRecord = `record${hardCodeRecords + counter}`;
+                reservedSeats[nextRecord] = {
+                    seat: thisSeat,
+                    owner: {
+                        fname:fname,
+                        lname:lname
+                    }
+                };
+                counter++;
+            });
+            document.getElementById('resform').style.display="none";
+            selectedSeats = [];
+            manageConfirmForm();
+            console.log(reservedSeats)
+        }
 }())
