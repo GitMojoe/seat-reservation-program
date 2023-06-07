@@ -1,3 +1,34 @@
+var reservedSeats = {
+    record1:{
+        seat: "b19",
+        owner:{
+            fname: 'Joe',
+            lname: 'Bandoh'
+        }
+    },
+    record2:{
+        seat: "b20",
+        owner: {
+            fname: 'Joyce',
+            lname: 'Tetteh'
+        }
+    },
+    record3:{
+        seat: "b21",
+        owner: {
+            fname: 'Germain', 
+            lname: 'Armah'
+        }
+    }, 
+    record4: {
+        seat: "b22",
+        owner: {
+            fname: 'Isaac',
+            lname: 'Bandoh'
+        }
+    }
+};
+
 function makeRows(sectionLength, rowLength, placement){
     const rows = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't'];
 
@@ -27,3 +58,20 @@ function makeRows(sectionLength, rowLength, placement){
 makeRows(3, 15, 'left');
 makeRows(3, 15, 'right');
 makeRows(9, 15, 'middle');
+
+(function(){
+    'use strict'
+    for (const key in reservedSeats){
+        if( reservedSeats.hasOwnProperty(key)){
+            const obj = reservedSeats[key]
+      
+            document.getElementById(obj.seat).className = 'r';
+            document.getElementById(obj.seat).innerHTML= 'R';
+    
+        }
+    
+    }
+
+
+})()
+
