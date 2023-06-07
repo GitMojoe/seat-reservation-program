@@ -73,5 +73,30 @@ makeRows(9, 15, 'middle');
     }
 
 
-})()
+}())
 
+(function(){
+    'use strict'
+
+    let selectedSeats = [];
+    let seats = document.querySelectorAll('.a');
+
+    seats.forEach( function (seat){
+        seat.addEventListener('click', function(){
+            seatSelectionProcess(seat.id);
+        });
+    });
+
+    function seatSelectionProcess(thisSeat){
+        let index = selectedSeats.indexOf(thisSeat)
+        if(index > -1){
+            selectedSeats.splice(index, 1)
+            document.getElementById(thisSeat).className = 'a'
+        }else{
+            selectedSeats.push(thisSeat);
+            document.getElementById(thisSeat).className='s';
+        }
+        console.log(selectedSeats)
+    }
+
+}())
